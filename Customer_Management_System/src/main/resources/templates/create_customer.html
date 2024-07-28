@@ -46,10 +46,9 @@
         }
        
         h1 {
-		   padding-top: 20px;
-            margin-bottom: 20px;
+		   margin-top: 5px;
             color: blue;
-            font-size: 30px;
+            font-size: 40px;
             text-align: center;
         }
         h2 {
@@ -68,7 +67,7 @@
         input[type="email"] {
             width: 100%;
             padding: 10px;
-            margin: 5px 0 20px;
+            margin: 5px 0 5px;
             border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
@@ -127,11 +126,16 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/customers">See Customer List Here</a>
-        
+       <div class="navbar">
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/add}">Add Customer</a>
+        <a th:href="@{/customers}">Customer List</a>
+         <a href="/customer">Get Customer by ID</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
     </div>
      <h1>Customer Management System</h1>
-      <p id="message"></p>
+   
     <div class="container">
        
         <h2>Add New Customer</h2>
@@ -156,8 +160,8 @@
             <input type="text" th:field="*{phone}" required />
             <button type="submit">Save Customer</button>
         </form>
-       
-        <div id="options" style="display: none;">
+          <p id="message"></p>
+        <div id="options">
             <a href="/add">Add Another Customer</a>
             <a href="/customers">View Customers</a>
         </div>

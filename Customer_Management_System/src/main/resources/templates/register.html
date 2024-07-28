@@ -3,15 +3,14 @@
 <head>
     <title>Register</title>
       <style>
-          body {
+             body {
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #e0eafc, #cfdef3);
+            margin: 0;
+            padding-top: 80px; /* Height of navbar + extra space */
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            margin: 0;
             align-items: center;
-            justify-content: center;
         }
         .navbar {
             background-color: teal;
@@ -22,6 +21,8 @@
             width: 100%;
             position: fixed;
             top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure the navbar stays on top */
         }
         .navbar a {
             color: white;
@@ -33,6 +34,14 @@
             background-color: cadetblue;
             border-radius: 4px;
         }
+        .heading {
+            font-size: 36px;
+            font-weight: bold;
+            color: blue;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
         .container {
             background: #fff;
             padding: 20px;
@@ -42,8 +51,7 @@
             max-width: 500px;
             text-align: center;
             transition: transform 0.2s;
-            height: auto;  
-            margin-top: 100px;  
+            margin-top: 20px;
         }
         .container h1 {
             font-size: 30px;
@@ -52,7 +60,7 @@
         }
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin: 5px 0;
             font-weight: bold;
             text-align: left;
         }
@@ -61,7 +69,7 @@
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin: 5px 0 5px;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
@@ -86,13 +94,11 @@
             font-weight: bold;
         }
         #message.success {
-            color: #28a745;  
+            color: #28a745;
         }
         #message.error {
-            color: #f44336;  
+            color: #f44336;
         }
-       
-       
     </style>
 </head>
 <body>
@@ -103,13 +109,10 @@
          <a href="/customer">Get Customer by ID</a>
         <a th:href="@{/logout}">Logout</a>
     </div>
-   
-        
-      
-     
-    <div id="message" class="message"></div>
+      <div class="heading">Customer Management System</div>
     <div class="container">
-        <h1>Register</h1>
+		  <h1>Register</h1>
+        
         <form id="customerForm" th:action="@{/register}" th:object="${user}" method="post">
             <label>First Name:</label>
             <input type="text" th:field="*{firstName}" required />
@@ -132,6 +135,7 @@
             <button type="submit">Register</button>
         </form>
     </div>
+     <div id="message" class="message"></div>
     
 </body>
 </html>
