@@ -28,7 +28,7 @@ The Customer Management System is a web application designed to manage customer 
 ### Clone the Repository
 
 ```
-git clone https://github.com/your-username/customer-management-system.git
+git clone https://github.com/khushboo787/customer-management-system.git
 cd customer-management-system
 ```
 #### Configure the Database
