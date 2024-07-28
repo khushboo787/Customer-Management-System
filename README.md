@@ -52,65 +52,27 @@ mvn clean install
 mvn spring-boot:run
 The application will be accessible at http://localhost:8070.
 
-### API Endpoints
+## API Endpoints
 
-#### User Endpoints
+### User Endpoints
+- **Add Role**: `POST /addrole` - Inserts a role into the database.
+- **Register User**: `POST /register` - Registers a new user.
+- **Login User**: `POST /login` - Authenticates a user.
+- **Get User**: `GET /getuser/{email}` - Retrieves user details by email.
 
-- **Add Role**: Inserts a role into the database (e.g., ROLE_ADMIN).
-  - **URL**: `/addrole`
-  - **Method**: `POST`
-  - **Body**: JSON object with role information
-
-- **Register User**: Registers a new user.
-  - **URL**: `/register`
-  - **Method**: `POST`
-  - **Body**: JSON object with user details
-
-- **Login User**: Authenticates a user.
-  - **URL**: `/login`
-  - **Method**: `POST`
-  - **Body**: JSON object with login credentials
-
-- **Get User**: Retrieves user details by email.
-  - **URL**: `/getuser/{email}`
-  - **Method**: `GET`
-  - **Path Variable**: `email`
-
-#### Customer Endpoints
-
-- **Add Customer**: Adds a new customer (Authentication required).
-  - **URL**: `/addCustomer`
-  - **Method**: `POST`
-  - **Body**: JSON object with customer details
-
-- **Get All Customers**: Retrieves a list of all customers.
-  - **URL**: `/getallCustomers`
-  - **Method**: `GET`
-
-- **Update Customer**: Updates customer information by ID (Authentication required).
-  - **URL**: `/updateCustomer/{id}`
-  - **Method**: `PUT`
-  - **Path Variable**: `id`
-  - **Body**: JSON object with updated customer details
-
-- **Delete Customer**: Deletes a customer by ID (Authentication required).
-  - **URL**: `/deleteCustomer/{id}`
-  - **Method**: `DELETE`
-  - **Path Variable**: `id`
-
-- **Get Customer**: Retrieves a single customer's details by ID.
-  - **URL**: `/getCustomer/{id}`
-  - **Method**: `GET`
-  - **Path Variable**: `id`
+### Customer Endpoints
+- **Add Customer**: `POST /addCustomer` - Adds a new customer (Authentication required).
+- **Get All Customers**: `GET /getallCustomers` - Retrieves a list of all customers.
+- **Update Customer**: `PUT /updateCustomer/{id}` - Updates customer information by ID (Authentication required).
+- **Delete Customer**: `DELETE /deleteCustomer/{id}` - Deletes a customer by ID (Authentication required).
+- **Get Customer**: `GET /getCustomer/{id}` - Retrieves a single customer's details by ID.
 
 ### Sync Functionality
 
 #### Sync Button
-
-On the customer list screen, a `Sync` button is available to fetch customer data from a remote API and update the local database. If the customer already exists, the existing record will be updated instead of inserting a new one.
+- A `Sync` button on the customer list screen fetches customer data from a remote API and updates the local database. Existing customers will be updated instead of inserting new ones.
 
 #### Authentication API
-
 - **URL**: `https://qa.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp`
 - **Method**: `POST`
 - **Request Body**:
@@ -119,3 +81,19 @@ On the customer list screen, a `Sync` button is available to fetch customer data
       "login_id": "test@sunbasedata.com",
       "password": "Test@123"
   }
+
+```
+ ## Sync API
+- **URL**: `https://qa.sunbasedata.com/sunbase/portal/api/customers`
+- **Method**: `GET`
+- **Headers**:
+  ```json
+  {
+      "Authorization": "Bearer <token>"
+  }
+```
+
+The fetched customer data is sent to the backend API endpoint /api/syncCustomers for processing and updating the local database.
+
+### License
+This project is licensed under the MIT License. See the LICENSE file for more details.
