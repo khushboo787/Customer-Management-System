@@ -39,23 +39,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable()
-//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and()
-//            .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-//            .and()
-//            .authorizeHttpRequests()
-//                .requestMatchers("/login", "/authenticate").permitAll()
-//                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-//                .requestMatchers("**/addCustomer",
-//                      "**/updateCustomer/{id}",
-//                      "**/deleteCustomer/{id}").hasAuthority("ROLE_ADMIN")
-//                .requestMatchers("/api/**").permitAll()
-//                .anyRequest().authenticated()
-//            .and()
-//            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
     	 http.csrf().disable()
          .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
          .and()
@@ -63,10 +46,8 @@ public class SecurityConfig {
          .and()
          .authorizeHttpRequests()
          .requestMatchers("/favicon.ico","/css/**", "/js/**").permitAll()
-         .requestMatchers("/customers","/sync","/customers/search").permitAll()
+         .requestMatchers("/customers","/sync","/customers/search","/customer").permitAll()
          .requestMatchers("/add", "/updateForm/{id}","/register","/login","/logout").permitAll()
-         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-         
       .requestMatchers( "/addCustomer", "/updateCustomer/{id}" , "/delete/{id}").hasAuthority("ROLE_ADMIN")
           
          .requestMatchers("/getAllCustomers").permitAll()

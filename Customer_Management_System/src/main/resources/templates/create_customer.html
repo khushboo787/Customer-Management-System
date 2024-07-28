@@ -131,37 +131,11 @@
         
     </div>
      <h1>Customer Management System</h1>
+      <p id="message"></p>
     <div class="container">
        
         <h2>Add New Customer</h2>
-        <!--  <form id="customerForm">
-            <label>First Name:</label>
-            <input type="text" name="firstName" required />
-
-            <label>Last Name:</label>
-            <input type="text" name="lastName" required />
-
-            <label>Street:</label>
-            <input type="text" name="street" required />
-
-            <label>Address:</label>
-            <input type="text" name="address" required />
-
-            <label>City:</label>
-            <input type="text" name="city" required />
-
-            <label>State:</label>
-            <input type="text" name="state" required />
-
-            <label>Email:</label>
-            <input type="email" name="email" required />
-
-            <label>Phone:</label>
-            <input type="text" name="phone" required />
-
-            <button type="submit">Save Customer</button>
-        </form>  -->
-
+      
          <form id="customerForm" th:action="@{/add}" th:object="${customer}" method="post">
             <label>First Name:</label>
             <input type="text" th:field="*{firstName}" required />
@@ -182,7 +156,7 @@
             <input type="text" th:field="*{phone}" required />
             <button type="submit">Save Customer</button>
         </form>
-        <p id="message"></p>
+       
         <div id="options" style="display: none;">
             <a href="/add">Add Another Customer</a>
             <a href="/customers">View Customers</a>

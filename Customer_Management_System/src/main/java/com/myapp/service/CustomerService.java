@@ -61,12 +61,7 @@ public class CustomerService {
         return customerRepository.findById(id).orElse(null);
     }
 
-    
- 
-    public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable);
-    }
-
+     
     public Page<Customer> getCustomers(String keyword, int page, int size, String sortBy, String sortDir) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
         if (keyword != null && !keyword.isEmpty()) {

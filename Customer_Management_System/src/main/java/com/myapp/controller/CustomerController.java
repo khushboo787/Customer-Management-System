@@ -160,6 +160,19 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/customer")
+    public String getCustomerById(@RequestParam(required = false) Integer id, Model model) {
+        if (id != null) {
+            Customer customer = customerService.getCustomerById(id);
+            if (customer != null) {
+                model.addAttribute("customer", customer);
+            } else {
+                model.addAttribute("message", "Customer ID " + id + " is not present.");
+            }
+        }
+        return "getCustomerById";
+    }
+
     @GetMapping("/updateForm/{id}")
     public String showUpdateCustomerForm(@PathVariable Integer id, Model model) {
         Customer customer = customerService.getCustomerById(id);

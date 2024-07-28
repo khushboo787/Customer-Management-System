@@ -115,6 +115,7 @@
       <div class="navbar">
         <a th:href="@{/add}">Add Customer</a>
         <a th:href="@{/customers}">Customer List</a>
+         <a href="/customer">Get Customer by ID</a>
         <a th:href="@{/logout}">Logout</a>
     </div>
 
@@ -169,6 +170,7 @@
         
          <div id="message" class="message"></div>
     
+        </div>
     
 </body>
 </html>
@@ -301,6 +303,16 @@
             }
         }
         
+        
+        function getCustomerById(customerId) {
+            fetch(`http://localhost:8070/getCustomerById/${customerId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('#customer-details').innerHTML = html;
+                    document.querySelector('#customer-details').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching customer details:', error));
+        }
     </script> 
     
    
