@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            display: flex;
+            flex-direction: column;
+            height: 140vh;
+            margin: 0;
+            align-items: center; /* Center align all content */
+            justify-content: center; /* Center align vertically */
+        }
+        .navbar {
+            background-color: teal;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            width: 100%; /* Make navbar full width */
+            position: fixed; /* Fix it to the top */
+            top: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: cadetblue;
+            border-radius: 4px;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px; /* Increase max width for better spacing */
+            /*  margin: 80px auto 20px; Adjust margin to account for navbar */
+            text-align: center;
+            transition: transform 0.2s; /* Smooth hover effect */
+        }
+       
+        h1 {
+		   padding-top: 20px;
+            margin-bottom: 20px;
+            color: blue;
+            font-size: 30px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: teal;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: darkorange;
+        }
+        #message {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        #message.success {
+            color: #28a745;  
+        }
+        #message.error {
+            color: #f44336;  
+        }
+        #options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+        #options a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        #options a:hover {
+            color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 10px;
+            background-color: teal;
+            color: white;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/customers">See Customer List Here</a>
+        
+    </div>
+     <h1>Customer Management System</h1>
+    <div class="container">
+       
+        <h2>Add New Customer</h2>
+        <!--  <form id="customerForm">
+            <label>First Name:</label>
+            <input type="text" name="firstName" required />
+
+            <label>Last Name:</label>
+            <input type="text" name="lastName" required />
+
+            <label>Street:</label>
+            <input type="text" name="street" required />
+
+            <label>Address:</label>
+            <input type="text" name="address" required />
+
+            <label>City:</label>
+            <input type="text" name="city" required />
+
+            <label>State:</label>
+            <input type="text" name="state" required />
+
+            <label>Email:</label>
+            <input type="email" name="email" required />
+
+            <label>Phone:</label>
+            <input type="text" name="phone" required />
+
+            <button type="submit">Save Customer</button>
+        </form>  -->
+
+         <form id="customerForm" th:action="@{/add}" th:object="${customer}" method="post">
+            <label>First Name:</label>
+            <input type="text" th:field="*{firstName}" required />
+            <label>Last Name:</label>
+            <input type="text" th:field="*{lastName}" required />
+            <label>Street:</label>
+            <input type="text" th:field="*{street}" required />
+            <label>Address:</label>
+            <input type="text" th:field="*{address}" required />
+            <label>City:</label>
+            <input type="text" th:field="*{city}" required />
+            <label>State:</label>
+            <input type="text" th:field="*{state}" required />
+             <label>Email:</label>
+            <input type="email" th:field="*{email}" required />
+
+            <label>Phone:</label>
+            <input type="text" th:field="*{phone}" required />
+            <button type="submit">Save Customer</button>
+        </form>
+        <p id="message"></p>
+        <div id="options" style="display: none;">
+            <a href="/add">Add Another Customer</a>
+            <a href="/customers">View Customers</a>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 Customer Management System
+    </div>
+   </body>
+    
+    <script>
+        document.getElementById('customerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this);
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+            const messageElement = document.getElementById('message');
+            const authToken = localStorage.getItem('authToken'); // Retrieve token from local storage
+
+            fetch('http://localhost:8070/addCustomer', { // Adjust the URL to match your server endpoint
+                method: 'POST',
+                body: json,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + authToken // Include the token in the headers
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status === 401) {
+                    throw new Error("Unauthorized");
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then(data => {
+                if (data.id) {
+                    messageElement.textContent = "Customer added successfully!";
+                    messageElement.className = 'message success';
+                } else {
+                    messageElement.textContent = data.message;
+                    messageElement.className = 'message error';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if (error.message === "Unauthorized") {
+                    messageElement.textContent = "You are not authorized to perform this action.";
+                } else {
+                    messageElement.textContent = "Customer already present in our database Use another email for Add new Customer!";
+                }
+                messageElement.className = 'message error';
+            });
+        });
+    </script>

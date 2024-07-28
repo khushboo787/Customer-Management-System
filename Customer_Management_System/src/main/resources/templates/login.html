@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Customer Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3); /* Gradient background */
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .navbar {
+            background-color: teal;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: cadetblue;
+            border-radius: 4px;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 360px;
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+            text-align: left;
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: teal;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+			
+            background-color: darkorange;
+        }
+        #message {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        #message.success {
+            color: #28a745;  
+        }
+        #message.error {
+            color: #f44336;  
+        }
+        #options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+        #options a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        #options a:hover {
+            color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 10px;
+            background-color: teal;
+            color: white;
+        }
+         
+
+          h1 {
+			  text-align: center;
+            font-size: 3.5em;
+            
+            margin: 10px;
+            padding: 10px;
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        
+        <a href="/add">Add Customer</a>
+        <a href="/customers">Customer List</a>
+        <a href="/logout">Logout</a>
+    </div>
+  
+  
+  
+    
+        <h1>Customer Management System</h1>
+    
+  
+   <div class="container">
+		 
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required />
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+            
+            <button type="submit">Login</button>
+        </form>
+        <p id="message"></p> <!-- Message element for feedback -->
+        <div id="options" style="display: none;">
+            <a href="/add">Add Customer</a>
+            <a href="/customers">View Customers</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Customer Management System - Your solution for managing customer data efficiently.</p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this);
+            const json = JSON.stringify({
+                email: formData.get('email'),
+                password: formData.get('password')
+            });
+
+            const messageElement = document.getElementById('message'); // Get the message element
+            const optionsElement = document.getElementById('options'); // Get the options element
+
+            fetch('http://localhost:8070/login', {
+                method: 'POST',
+                body: json,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    messageElement.textContent = "Login successful!";
+                    messageElement.className = 'success';
+                    optionsElement.style.display = 'block';
+                    localStorage.setItem('authToken', data.token); // Store token in local storage
+                } else {
+                    messageElement.textContent = data.message;
+                    messageElement.className = 'error';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
