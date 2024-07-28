@@ -1,7 +1,5 @@
 # Customer Management System
 
-## Overview
-
 The Customer Management System is a web application designed to manage customer information. It allows users to perform CRUD (Create, Read, Update, Delete) operations on customer data, and includes a feature to sync customer data with a remote API.
 
 ## Technologies Used
@@ -54,83 +52,70 @@ mvn clean install
 mvn spring-boot:run
 The application will be accessible at http://localhost:8070.
 
-#### API Endpoints
-User Endpoints
-Add Role: Inserts a role into the database (e.g., ROLE_ADMIN).
+### API Endpoints
 
-URL: /addrole
-Method: POST
-Body: JSON object with role information
-Register User: Registers a new user.
+#### User Endpoints
 
-URL: /register
-Method: POST
-Body: JSON object with user details
-Login User: Authenticates a user.
+- **Add Role**: Inserts a role into the database (e.g., ROLE_ADMIN).
+  - **URL**: `/addrole`
+  - **Method**: `POST`
+  - **Body**: JSON object with role information
 
-URL: /login
-Method: POST
-Body: JSON object with login credentials
-Get User: Retrieves user details by email.
+- **Register User**: Registers a new user.
+  - **URL**: `/register`
+  - **Method**: `POST`
+  - **Body**: JSON object with user details
 
-URL: /getuser/{email}
-Method: GET
-Path Variable: email
-Customer Endpoints
-Add Customer: Adds a new customer (Authentication required).
+- **Login User**: Authenticates a user.
+  - **URL**: `/login`
+  - **Method**: `POST`
+  - **Body**: JSON object with login credentials
 
-URL: /addCustomer
-Method: POST
-Body: JSON object with customer details
-Get All Customers: Retrieves a list of all customers.
+- **Get User**: Retrieves user details by email.
+  - **URL**: `/getuser/{email}`
+  - **Method**: `GET`
+  - **Path Variable**: `email`
 
-URL: /getallCustomers
-Method: GET
-Update Customer: Updates customer information by ID (Authentication required).
+#### Customer Endpoints
 
-URL: /updateCustomer/{id}
-Method: PUT
-Path Variable: id
-Body: JSON object with updated customer details
-Delete Customer: Deletes a customer by ID (Authentication required).
+- **Add Customer**: Adds a new customer (Authentication required).
+  - **URL**: `/addCustomer`
+  - **Method**: `POST`
+  - **Body**: JSON object with customer details
 
-URL: /deleteCustomer/{id}
-Method: DELETE
-Path Variable: id
-Get Customer: Retrieves a single customer's details by ID.
+- **Get All Customers**: Retrieves a list of all customers.
+  - **URL**: `/getallCustomers`
+  - **Method**: `GET`
 
-URL: /getCustomer/{id}
-Method: GET
-Path Variable: id
-Sync Functionality
-Sync Button
-On the customer list screen, a Sync button is available to fetch customer data from a remote API and update the local database. If the customer already exists, the existing record will be updated instead of inserting a new one.
+- **Update Customer**: Updates customer information by ID (Authentication required).
+  - **URL**: `/updateCustomer/{id}`
+  - **Method**: `PUT`
+  - **Path Variable**: `id`
+  - **Body**: JSON object with updated customer details
 
-Authentication API
-URL: https://qa.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp
+- **Delete Customer**: Deletes a customer by ID (Authentication required).
+  - **URL**: `/deleteCustomer/{id}`
+  - **Method**: `DELETE`
+  - **Path Variable**: `id`
 
-Method: POST
+- **Get Customer**: Retrieves a single customer's details by ID.
+  - **URL**: `/getCustomer/{id}`
+  - **Method**: `GET`
+  - **Path Variable**: `id`
 
-Request Body:
+### Sync Functionality
 
-json
-Copy code
-{
-    "login_id": "test@sunbasedata.com",
-    "password": "Test@123"
-}
-This API will return a bearer token to be used in subsequent API calls for syncing customers.
+#### Sync Button
 
-Sync API
-URL: https://qa.sunbasedata.com/sunbase/portal/api/customers
+On the customer list screen, a `Sync` button is available to fetch customer data from a remote API and update the local database. If the customer already exists, the existing record will be updated instead of inserting a new one.
 
-Method: GET
+#### Authentication API
 
-Headers:
-
-json
- 
-{
-    "Authorization": "Bearer <token>"
-}
-The fetched customer data will be sent to the backend API endpoint /api/syncCustomers for processing and updating the local database.
+- **URL**: `https://qa.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+      "login_id": "test@sunbasedata.com",
+      "password": "Test@123"
+  }
