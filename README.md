@@ -4,26 +4,22 @@ The Customer Management System is a web application designed to manage customer 
 
 ## Technologies Used
 
-- **Backend**: Spring Boot, Java
-- **Frontend**: Thymeleaf, HTML, CSS, JavaScript
+- **Backend**: Core Java, Spring Boot, JSP, Spring Security
+- **Frontend**:Thymeleaf, HTML, CSS, JavaScript
 - **Database**: MySQL
 - **Authentication**: JWT (JSON Web Tokens)
 
+
 ## Features
 
-- User authentication and authorization.
-- CRUD operations for customer data.
-- Sync functionality to fetch and update customer data from a remote API.
-- Search and pagination for customer records.
+- **Authentication and Authorization:** Secure user login and role-based access control using Spring Security.
+- **CRUD Operations:** Create, read, update, and delete customer records.
+- **Search Functionality** : Search and pagination for customer records.
+- **Data Synchronization:** Fetch and update customer data from a remote API.
+- **Frontend:** User-friendly interface built with  hymeleaf, HTML, CSS, and JavaScript.
+
 
 ## Setup and Installation
-
-### Prerequisites
-
-- Java 17 or later
-- MySQL
-- Maven
-- Git
 
 ### Clone the Repository
 
@@ -31,6 +27,7 @@ The Customer Management System is a web application designed to manage customer 
 git clone https://github.com/khushboo787/customer-management-system.git
 cd customer-management-system
 ```
+
 #### Configure the Database
 
 Create a database named customer_db in MySQL.
@@ -47,7 +44,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 ```
 
 
- ### Build and Run the Application
+### Build and Run the Application
 mvn clean install
 mvn spring-boot:run
 The application will be accessible at http://localhost:8070.
@@ -59,7 +56,6 @@ The application will be accessible at http://localhost:8070.
 - **Register User**: `POST /register` - Registers a new user.
 - **Login User**: `POST /login` - Authenticates a user.
 - **Get User**: `GET /getuser/{email}` - Retrieves user details by email.
-
  
  ### Login Endpoint
        **Endpoint:** `POST /login`
@@ -83,17 +79,15 @@ The application will be accessible at http://localhost:8070.
 ```
 
 
-
-
 ### Customer Endpoints
-- **Add Customer**: `POST /addCustomer` - Adds a new customer (Authentication required).
-- **Get All Customers**: `GET /getallCustomers` - Retrieves a list of all customers.
-- **Update Customer**: `PUT /updateCustomer/{id}` - Updates customer information by ID (Authentication required).
-- **Delete Customer**: `DELETE /deleteCustomer/{id}` - Deletes a customer by ID (Authentication required).
-- **Get Customer**: `GET /getCustomer/{id}` - Retrieves a single customer's details by ID.
-- **Sync Button** :
-  A `Sync` button on the customer list screen fetches customer data from a remote API and updates the local database. Existing customers will be updated instead of inserting new ones.
-  The fetched customer data is sent to the backend API endpoint /api/syncCustomers for processing and updating the local database.
+
+- **Add Customer:** `POST /addCustomer`
+- **Get All Customers:** `GET /getallCustomers`
+- **Update Customer:** `PUT /updateCustomer/{id}`
+- **Delete Customer:** `DELETE /deleteCustomer/{id}`
+- **Get Customer by ID:** `GET /getCustomer/{id}`
+- **Sync Button** :  A `Sync` button on the customer list screen fetches customer data from a remote API and updates the local database.
+   
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for more details.
