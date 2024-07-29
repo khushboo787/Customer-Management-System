@@ -43,7 +43,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ```
 
-#### The application will be accessible at http://localhost:8070.
+#### The application will be accessible at http://localhost:8070
 
 ### Build and Run the Application
 ```
