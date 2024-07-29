@@ -46,8 +46,10 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 #### The application will be accessible at http://localhost:8070.
 
 ### Build and Run the Application
+```
 mvn clean install
 mvn spring-boot:run
+```
 
 
 ## API Endpoints
@@ -62,6 +64,7 @@ mvn spring-boot:run
        **Endpoint:** `POST /login`
        **URL:** `http://localhost:8070/login`
 
+
 #### Request Body
 
 ```json
@@ -71,6 +74,8 @@ mvn spring-boot:run
 }
 
 ```
+
+
 #### Response
 ```
       {
