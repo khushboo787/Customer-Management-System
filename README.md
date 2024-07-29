@@ -43,16 +43,17 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ```
 
+#### The application will be accessible at http://localhost:8070.
 
 ### Build and Run the Application
 mvn clean install
 mvn spring-boot:run
-The application will be accessible at http://localhost:8070.
+
 
 ## API Endpoints
 
 ### User Endpoints
-- **Add Role**: `POST /addrole` - Inserts a role into the database.
+- **Add Role**: `POST /addrole` -(here need to insert the role into database before register like: ROLE_ADMIN)
 - **Register User**: `POST /register` - Registers a new user.
 - **Login User**: `POST /login` - Authenticates a user.
 - **Get User**: `GET /getuser/{email}` - Retrieves user details by email.
