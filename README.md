@@ -60,40 +60,40 @@ The application will be accessible at http://localhost:8070.
 - **Login User**: `POST /login` - Authenticates a user.
 - **Get User**: `GET /getuser/{email}` - Retrieves user details by email.
 
+ 
+ ### Login Endpoint
+       **Endpoint:** `POST /login`
+       **URL:** `http://localhost:8070/login`
+
+#### Request Body
+
+```json
+{
+  "email": "seema@gmail.com",
+  "password": "123456"
+}
+
+```
+#### Response
+```
+      {
+          "message": "Login successful!",
+          "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZWVtYUBnbWFpbC5jb20iLCJpYXQiOjE3MjIyMzQyMDYsImV4cCI6MTcyMjMyMDYwNn0.T-x_DQ7FecqC5kjMG6Xl5z8nd-2ShSr1L9kfoSg6VnMgEre4I3nPEck73HvUK45KJk9-kre6_Zg02oHno_mt_w"
+     }
+```
+
+
+
+
 ### Customer Endpoints
 - **Add Customer**: `POST /addCustomer` - Adds a new customer (Authentication required).
 - **Get All Customers**: `GET /getallCustomers` - Retrieves a list of all customers.
 - **Update Customer**: `PUT /updateCustomer/{id}` - Updates customer information by ID (Authentication required).
 - **Delete Customer**: `DELETE /deleteCustomer/{id}` - Deletes a customer by ID (Authentication required).
 - **Get Customer**: `GET /getCustomer/{id}` - Retrieves a single customer's details by ID.
-
-### Sync Functionality
-
-#### Sync Button
-- A `Sync` button on the customer list screen fetches customer data from a remote API and updates the local database. Existing customers will be updated instead of inserting new ones.
-
-#### Authentication API
-- **URL**: `https://qa.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp`
-- **Method**: `POST`
-- **Request Body**:
-  ```json
-  {
-      "login_id": "test@sunbasedata.com",
-      "password": "Test@123"
-  }
-
-```
- ## Sync API
-- **URL**: `https://qa.sunbasedata.com/sunbase/portal/api/customers`
-- **Method**: `GET`
-- **Headers**:
-  ```json
-  {
-      "Authorization": "Bearer <token>"
-  }
-```
-
-The fetched customer data is sent to the backend API endpoint /api/syncCustomers for processing and updating the local database.
+- **Sync Button** :
+  A `Sync` button on the customer list screen fetches customer data from a remote API and updates the local database. Existing customers will be updated instead of inserting new ones.
+  The fetched customer data is sent to the backend API endpoint /api/syncCustomers for processing and updating the local database.
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for more details.
