@@ -1,6 +1,7 @@
 # Customer Management System
 
-The Customer Management System is a web application designed to manage customer information. It allows users to perform CRUD (Create, Read, Update, Delete) operations on customer data, and includes a feature to sync customer data with a remote API.
+The Customer Management System is a web application designed to manage customer information. It allows users to perform CRUD (Create, Read, Update, Delete) operations on customer data. The application features authentication and authorization to ensure secure access to customer data.
+
 
 ## Technologies Used
 
